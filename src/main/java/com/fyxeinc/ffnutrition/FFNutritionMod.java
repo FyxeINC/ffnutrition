@@ -4,6 +4,8 @@ import com.fyxeinc.ffnutrition.config.FFNutritionConfigCommon;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -80,11 +82,10 @@ public class FFNutritionMod
 
         maxHealth = Math.round(maxHealth / 2.0) * 2.0;
 
-        // todo - double the value
-        player.getAttributes().getInstance(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)
-                .setBaseValue(maxHealth);
-
-        if (player.getHealth() > maxHealth)
+        AttributeInstance maxHealthAttribute = player.getAttribute(Attributes.MAX_HEALTH);
+        maxHealthAttribute.setBaseValue(maxHealth);
+        double realMaxHealth = maxHealthAttribute.getValue();
+        if (player.getHealth() > realMaxHealth)
         {
             player.setHealth((float) maxHealth);
         }
