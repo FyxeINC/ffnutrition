@@ -1,0 +1,19 @@
+{
+  "ffnutrition.configuration.useHungerDecay": "Use Hunger Decay",
+  "ffnutrition.configuration.hungerDecayTicks": "Hunger Decay Ticks",
+  "ffnutrition.configuration.hungerDecayAmount": "Hunger Decay Amount",
+  "ffnutrition.configuration.saturationDecayAmount": "Saturation Decay Amount",
+  "ffnutrition.configuration.creativeDecayHunger": "Decay Hunger/Saturation in Creative",
+  "ffnutrition.configuration.creativeDecayNutrition": "Decay Nutrition in Creative",
+  "ffnutrition.configuration.initialDefault": "Fallback Nutrition Value",
+  "ffnutrition.configuration.decayDefault": "Fallback Decay per Tick",
+  "ffnutrition.configuration.decayByCategory": "Category Decay per Tick",
+  "ffnutrition.configuration.maxHealth": "Maximum Max Health",
+  "ffnutrition.configuration.minHealth": "Minimum Max Health",
+  "ffnutrition.configuration.itemNutritionCategories": "Nutrition Categories",
+  "ffnutrition.configuration.nutritionModifier": "Nutrition Multiplier",
+  "ffnutrition.configuration.saturationModifier": "Saturation Multiplier",
+  "ffnutrition.configuration.useItemNutritionFallback": "Use Fallback Nutrition",
+  "ffnutrition.configuration.defaultNutritionFallback": "Fallback Nutrition",
+  "ffnutrition.configuration.itemNutrition": "Specific Item Nutrition"
+}
