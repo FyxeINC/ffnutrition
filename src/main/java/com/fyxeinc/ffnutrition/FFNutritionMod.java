@@ -62,25 +62,9 @@ public class FFNutritionMod
         double defaultDecay = FFNutritionConfigCommon.DECAY_DEFAULT.get();
 
         //List<Double> categoryDecay = new ArrayList<>(FFNutritionConfig.DECAY_BY_CATEGORY.get()); // TODO
-
         data.addToAllCategories(-defaultDecay);
 
-        // Update max health
-        double score = data.getNutritionScore();
-        double maxHealth = score * FFNutritionConfigCommon.MAX_HEALTH.get();
-
-        double minHealth = FFNutritionConfigCommon.MIN_HEALTH.get();
-        if (minHealth <= 0)
-        {
-            minHealth = 1;
-        }
-
-        if (maxHealth < minHealth)
-        {
-            maxHealth = minHealth;
-        }
-
-        maxHealth = Math.round(maxHealth / 2.0) * 2.0;
+        long maxHealth = calculateMaxHealth(data);
 
         AttributeInstance maxHealthAttribute = player.getAttribute(Attributes.MAX_HEALTH);
         maxHealthAttribute.setBaseValue(maxHealth);
@@ -89,6 +73,21 @@ public class FFNutritionMod
         {
             player.setHealth((float) maxHealth);
         }
+    }
+
+    private static long calculateMaxHealth(NutritionData data)
+    {
+        double score = data.getNutritionScore();
+
+        // Make min health at least 1
+        double min = Math.max(1, FFNutritionConfigCommon.MIN_HEALTH.get());
+        // Make max health greater or equal to min health
+        double max = Math.max(min, FFNutritionConfigCommon.MAX_HEALTH.get());
+
+        // FIXME: `min` is not actually used in the calculation
+        long result = Math.round(score * max / 2.0) * 2L;
+        // LOGGER.info("Current max health:{}. (Score:{}, Min:{}, Max:{})", result, score, minHealth, maxHealth);
+        return result;
     }
 
     public static void server_ReducePlayerHunger(Player player, int amountHunger, int amountSaturation)
